@@ -2,18 +2,18 @@
 #include "rational.hpp"
 
 Rational operator-(const Rational& r) {
-    return {-r.getNum(), r.getDenum()};
+    return {-r.GetNum(), r.GetDenum()};
 }
 
 Rational& Rational::operator+=(const Rational& r) {
-    int64_t lmc = denom * r.getDenum() / std::gcd(denom, r.getDenum());
+    int64_t lmc = denom * r.GetDenum() / std::gcd(denom, r.GetDenum());
 
     num *= lmc / denom;
     denom *= lmc / denom;
 
     // Почему могу обращаться к num, хотя он private?
     // this->num += r.num * lmc;
-    num += r.getNum() * lmc / r.getDenum();
+    num += r.GetNum() * lmc / r.GetDenum();
 
     simplify();
     return *this;
@@ -37,8 +37,8 @@ Rational operator-(const Rational& l, const Rational& r) {
 }
 
 Rational& Rational::operator*=(const Rational& r) {
-    this->num *= r.getNum();
-    this->denom *= r.getDenum();
+    this->num *= r.GetNum();
+    this->denom *= r.GetDenum();
     simplify();
     return *this;
 }
@@ -50,12 +50,12 @@ Rational operator*(const Rational& l, const Rational& r) {
 }
 
 Rational& Rational::operator/=(const Rational& r) {
-    if (r.getNum() == 0) {
+    if (r.GetNum() == 0) {
         throw std::runtime_error("Zero division");
     }
 
-    this->num *= r.getDenum();
-    this->denom *= r.getNum();
+    this->num *= r.GetDenum();
+    this->denom *= r.GetNum();
     simplify();
     return *this;
 }
@@ -91,22 +91,22 @@ Rational Rational::operator--(int) {
 }
 
 bool operator==(const Rational& l, const Rational& r) {
-    return l.getNum() == r.getNum() && l.getDenum() == r.getDenum();
+    return l.GetNum() == r.GetNum() && l.GetDenum() == r.GetDenum();
 }
 
 bool operator!=(const Rational& l, const Rational& r) {
     return !operator==(l, r);
 }
 
-int64_t Rational::getNum() const {
+int64_t Rational::GetNum() const {
     return num;
 }
 
-int64_t Rational::getDenum() const {
+int64_t Rational::GetDenum() const {
     return denom;
 }
 
-std::istream& Rational::readFrom(std::istream& istream) {
+std::istream& Rational::ReadFrom(std::istream& istream) {
     int64_t numI = 0;
     int64_t denomI = 0;
     char separator = 0;
@@ -127,17 +127,17 @@ std::istream& Rational::readFrom(std::istream& istream) {
     return istream;
 }
 
-std::ostream& Rational::writeTo(std::ostream& ostream) const {
-    ostream << getNum() << '/' << getDenum() << "\n";
+inline std::ostream& Rational::WriteTo(std::ostream& ostream) const {
+    ostream << GetNum() << '/' << GetDenum() << "\n";
     return ostream;
 }
 
 std::ostream& operator<<(std::ostream& ostream, const Rational& r) {
-    r.writeTo(ostream);
+    r.WriteTo(ostream);
     return ostream;
 }
 
 std::istream& operator>>(std::istream& istream, Rational& r) {
-    r.readFrom(istream);
+    r.ReadFrom(istream);
     return istream;
 }

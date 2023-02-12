@@ -39,13 +39,13 @@ public:
 
     Rational operator--(int);
 
-    std::istream& readFrom(std::istream& istream);
+    std::istream& ReadFrom(std::istream& istream);
 
-    std::ostream& writeTo(std::ostream& ostream) const;
+    inline std::ostream& WriteTo(std::ostream& ostream) const;
 
-    int64_t getNum() const;
+    int64_t GetNum() const;
 
-    int64_t getDenum() const;
+    int64_t GetDenum() const;
 
 private:
     int64_t num = 1;
