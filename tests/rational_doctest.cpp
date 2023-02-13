@@ -27,5 +27,10 @@ TEST_CASE("testing the Rational arithmetic") {
         CHECK(first / second == Rational(17, 4));
         CHECK_THROWS_AS(Rational(1, 0), const std::runtime_error);
         CHECK_THROWS_AS(first / Rational(0, 1), const std::runtime_error);
+
+        Rational a = {5, -7};
+        Rational b = {2, 3};
+        b /= a;
+        std::cout << b;
     }
 }
