@@ -6,7 +6,7 @@ class Rational {
 public:
     Rational() = default;
 
-    explicit Rational(const Rational& r) = default;
+    Rational(const Rational& r) = default;
 
     Rational(int64_t num, int64_t denom);
 

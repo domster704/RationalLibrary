@@ -37,7 +37,7 @@ Rational operator-(const Rational& r) {
 }
 
 Rational& Rational::operator+=(const Rational& r) {
-    int64_t lmc = denom * r.GetDenum() / std::gcd(denom, r.GetDenum());
+    int64_t lmc = denom * r.GetDenum() / gcd(denom, r.GetDenum());
 
     num *= lmc / denom;
     denom *= lmc / denom;
@@ -127,6 +127,22 @@ bool operator==(const Rational& l, const Rational& r) {
 
 bool operator!=(const Rational& l, const Rational& r) {
     return !operator==(l, r);
+}
+
+bool operator>(const Rational& l, const Rational& r) {
+    return (l.GetNum() / (double) l.GetDenum()) > (r.GetNum() / (double) r.GetDenum());
+}
+
+bool operator<(const Rational& l, const Rational& r) {
+    return (l.GetNum() / (double) l.GetDenum()) < (r.GetNum() / (double) r.GetDenum());
+}
+
+bool operator>=(const Rational& l, const Rational& r) {
+    return !operator<(l, r);
+}
+
+bool operator<=(const Rational& l, const Rational& r) {
+    return !operator>(l, r);
 }
 
 int64_t Rational::GetNum() const {
