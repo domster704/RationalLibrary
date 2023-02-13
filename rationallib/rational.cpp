@@ -1,6 +1,37 @@
 #include <iostream>
 #include "rational.hpp"
 
+Rational::Rational(int64_t num, int64_t denom) : num(num), denom(denom) {
+    if (denom == 0) {
+        throw std::runtime_error("Zero division");
+    }
+    if (num * denom < 0) {
+        this->num = -std::abs(num);
+        this->denom = std::abs(denom);
+    }
+    simplify();
+}
+
+int64_t gcd(int64_t a, int64_t b) {
+    if (a < b) {
+        std::swap(a, b);
+    }
+    while (a % b != 0) {
+        a = a % b;
+        std::swap(a, b);
+    }
+    return b;
+}
+
+void Rational::simplify() {
+    int64_t localGCD = denom;
+    if (num != 0) {
+        localGCD = gcd(num, denom);
+    }
+    num /= localGCD;
+    denom /= localGCD;
+}
+
 Rational operator-(const Rational& r) {
     return {-r.GetNum(), r.GetDenum()};
 }

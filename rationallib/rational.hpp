@@ -8,16 +8,7 @@ public:
 
     Rational(const Rational& r) = default;
 
-    Rational(int64_t num, int64_t denom) : num(num), denom(denom) {
-        if (denom == 0) {
-            throw std::runtime_error("Zero division");
-        }
-        if (num * denom < 0) {
-            this->num = -std::abs(num);
-            this->denom = std::abs(denom);
-        }
-        simplify();
-    }
+    Rational(int64_t num, int64_t denom);
 
     ~Rational() = default;
 
@@ -51,14 +42,7 @@ private:
     int64_t num = 1;
     int64_t denom = 1;
 
-    void simplify() {
-        int64_t gcd = denom;
-        if (num != 0) {
-            gcd = std::gcd(num, denom);
-        }
-        num /= gcd;
-        denom /= gcd;
-    }
+    void simplify();
 };
 
 Rational operator-(const Rational& r);
