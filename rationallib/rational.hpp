@@ -30,6 +30,18 @@ public:
 
     Rational operator--(int);
 
+    bool operator==(const Rational& r);
+
+    bool operator!=(const Rational& r);
+
+    bool operator>(const Rational& r);
+
+    bool operator<(const Rational& r);
+
+    bool operator>=(const Rational& r);
+
+    bool operator<=(const Rational& r);
+
     std::istream& ReadFrom(std::istream& istream);
 
     inline std::ostream& WriteTo(std::ostream& ostream) const;
@@ -54,10 +66,6 @@ Rational operator-(const Rational& l, const Rational& r);
 Rational operator*(const Rational& l, const Rational& r);
 
 Rational operator/(const Rational& l, const Rational& r);
-
-bool operator==(const Rational& l, const Rational& r);
-
-bool operator!=(const Rational& l, const Rational& r);
 
 std::ostream& operator<<(std::ostream& ostream, const Rational& r);
 

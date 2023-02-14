@@ -42,7 +42,7 @@ Rational& Rational::operator+=(const Rational& r) {
     num *= lmc / denom;
     denom *= lmc / denom;
 
-    // Почему могу обращаться к num, хотя он private?
+    // Почему могу обращаться к r.num, хотя он private?
     // this->num += r.num * lmc;
     num += r.GetNum() * lmc / r.GetDenum();
 
@@ -121,28 +121,28 @@ Rational Rational::operator--(int) {
     return temp;
 }
 
-bool operator==(const Rational& l, const Rational& r) {
-    return l.GetNum() == r.GetNum() && l.GetDenum() == r.GetDenum();
+bool Rational::operator==(const Rational& r) {
+    return this->GetNum() == r.GetNum() && this->GetDenum() == r.GetDenum();
 }
 
-bool operator!=(const Rational& l, const Rational& r) {
-    return !operator==(l, r);
+bool Rational::operator!=(const Rational& r) {
+    return !operator==(r);
 }
 
-bool operator>(const Rational& l, const Rational& r) {
-    return (l.GetNum() / (double) l.GetDenum()) > (r.GetNum() / (double) r.GetDenum());
+bool Rational::operator>(const Rational& r) {
+    return (this->GetNum() / (double) this->GetDenum()) > (r.GetNum() / (double) r.GetDenum());
 }
 
-bool operator<(const Rational& l, const Rational& r) {
-    return (l.GetNum() / (double) l.GetDenum()) < (r.GetNum() / (double) r.GetDenum());
+bool Rational::operator<(const Rational& r) {
+    return !(operator>(r) || operator==(r));
 }
 
-bool operator>=(const Rational& l, const Rational& r) {
-    return !operator<(l, r);
+bool Rational::operator>=(const Rational& r) {
+    return !operator<(r);
 }
 
-bool operator<=(const Rational& l, const Rational& r) {
-    return !operator>(l, r);
+bool Rational::operator<=(const Rational& r) {
+    return !operator>(r);
 }
 
 int64_t Rational::GetNum() const {
