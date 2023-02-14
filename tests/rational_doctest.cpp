@@ -34,3 +34,28 @@ TEST_CASE("testing the Rational arithmetic") {
         std::cout << b;
     }
 }
+
+TEST_CASE("testing comparison of rational") {
+    Rational first = Rational(2, 8);
+    Rational firstC = Rational(2, 8);
+    Rational second = Rational(1, 17);
+
+    SUBCASE("==") {
+        CHECK_FALSE(first == second);
+        CHECK(first != second);
+        CHECK(first == firstC);
+        CHECK_FALSE(first != firstC);
+    }
+
+    SUBCASE("<>") {
+        CHECK(first > second);
+        CHECK_FALSE(first > firstC);
+        CHECK_FALSE(first < second);
+    }
+
+    SUBCASE("<>=") {
+        CHECK(first >= second);
+        CHECK(first >= firstC);
+        CHECK_FALSE(first <= second);
+    }
+}
